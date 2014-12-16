@@ -11,7 +11,7 @@ public class ApplicationPropertiesTest {
 	public void testGetConfigPropertiesPath() {
 		ApplicationProperties properties = new ApplicationProperties();
 		assertThat(properties.getConfigPropertiesPath(),
-				is("test/config.properties"));
+				is("src/test/resources/config.properties"));
 	}
 
 }

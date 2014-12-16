@@ -12,7 +12,7 @@ public class ConfigTest {
 
 	@Test
 	public void testGetInDir() {
-		assertThat(config.getInDir(), is("/var/data/in"));
+		assertThat(config.getInDir(), is("src/test/resources/in"));
 	}
 
 	@Test
@@ -22,7 +22,7 @@ public class ConfigTest {
 
 	@Test
 	public void testGetOutDir() {
-		assertThat(config.getOutDir(), is("/var/data/out"));
+		assertThat(config.getOutDir(), is("src/test/resources/out"));
 	}
 
 	@Test
