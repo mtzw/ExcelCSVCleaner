@@ -1,0 +1,74 @@
+apply plugin: 'java'
+
+version = projectVersion
+group = 'com.github.mtzw'
+
+sourceCompatibility = jdkVersion
+
+configurations {
+  provided
+}
+
+sourceSets {
+  main {
+    java {
+      srcDir 'src/main/java'
+    }
+    resources {
+      srcDir 'src/main/resources'
+      srcDir 'src/main/java'
+    }
+    compileClasspath += configurations.provided
+  }
+  test {
+    compileClasspath += configurations.provided
+    runtimeClasspath += configurations.provided
+  }
+}
+
+compileJava {
+  options.encoding = 'UTF-8'
+}
+
+compileTestJava {
+  options.encoding = 'UTF-8'
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '2.0'
+}
+
+task copyDependencies(type: Sync) {
+  from configurations.runtime
+  into 'build/dependency'
+}
+build.dependsOn copyDependencies
+
+task gather(type: Sync) {
+  from 'build/libs'
+  from 'build/dependency'
+  into 'ExcelCSVCleaner/jars'
+}
+gather.dependsOn build
+
+task dist(type: Zip) {
+  from 'ExcelCSVCleaner'
+}
+dist.dependsOn gather
+
+repositories {
+  mavenCentral()
+  mavenLocal()
+}
+
+dependencies {
+  compile 'org.apache.commons:commons-lang3:3.2.1'
+  compile 'com.google.guava:guava:18.0'
+  compile 'com.opencsv:opencsv:3.1'
+  compile 'ch.qos.logback:logback-classic:1.1.2'
+
+  testCompile 'org.mockito:mockito-core:1.9.5'
+  testCompile 'junit:junit:4.11'
+}
+
+apply from:'eclipse.gradle'
