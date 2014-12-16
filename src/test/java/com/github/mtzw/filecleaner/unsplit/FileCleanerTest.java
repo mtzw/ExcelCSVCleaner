@@ -18,6 +18,9 @@ public class FileCleanerTest {
 		}
 		assertTrue(Files.exists(Paths
 				.get("src/test/resources/out/testdata.csv")));
+		assertTrue(Files
+				.exists(Paths.get("src/test/resources/out/KEN_ALL.csv")));
+
 	}
 
 }
